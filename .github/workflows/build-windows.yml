@@ -32,9 +32,9 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Add the necessary Windows binaries (ignoring pdbs)
-          git add Binaries/Win64/**/*.dll
-          git add Binaries/Win64/**/*.modules
-          git add Binaries/Win64/**/*.target
+          git add Binaries/Win64/*.dll
+          git add Binaries/Win64/*.modules
+          git add Binaries/Win64/*.target
           
           # Only commit if there are changes
           if (git diff --staged --quiet) {
