@@ -40,6 +40,6 @@ jobs:
           if (git diff --staged --quiet) {
             Write-Host "No changes to commit."
           } else {
-            git commit -m "Automated Windows build [skip ci]"
+            git commit -m "Automated Windows binaries build for tag $GITHUB_REF"
             git push origin HEAD:main # UPDATE "main" IF YOUR DEFAULT BRANCH IS DIFFERENT
           }

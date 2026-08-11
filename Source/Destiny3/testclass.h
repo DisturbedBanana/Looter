@@ -13,7 +13,7 @@ public:
 	ATestClass();
 
 	// Simple placeholder values for editor/Blueprint wiring.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Placeholder")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Placeholdergit update-index --assume-unchanged Destiny3.uproject")
 	float PlaceholderFloat = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Placeholder")
