@@ -31,8 +31,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Force add the Windows binaries (in case gitignore acts up, though our gitignore handles it)
-          git add Binaries/Win64/ -f
+          # Add the necessary Windows binaries (ignoring pdbs)
+          git add Binaries/Win64/**/*.dll
+          git add Binaries/Win64/**/*.modules
+          git add Binaries/Win64/**/*.target
           
           # Only commit if there are changes
           if (git diff --staged --quiet) {
