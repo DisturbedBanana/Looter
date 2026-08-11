@@ -28,8 +28,8 @@ jobs:
 
       - name: Commit and Push Binaries
         run: |
-          git config --global user.name "DisturbedBanana"
-          git config --global user.email "tompouts@gmail.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
           # Add the necessary Windows binaries (ignoring pdbs)
           git add Binaries/Win64/*.dll
@@ -40,7 +40,7 @@ jobs:
           if (git diff --staged --quiet) {
             Write-Host "No changes to commit."
           } else {
-            git commit -m "Automated Windows binaries build for tag $GITHUB_REF"
+            git commit -m "Automated Windows binaries build for tag $GITHUB_REF [skip ci]"
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main
