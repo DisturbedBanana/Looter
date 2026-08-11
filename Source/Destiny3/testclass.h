@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Placeholder")
 	FString PlaceholderText = TEXT("Hello from TestClass");
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Placeholder TEST NEW SECTION FOR BUILD")
+	FString NewSectionText = TEXT("Hello from New Section");
+
 	UFUNCTION(BlueprintCallable, Category = "Placeholder")
 	void SetPlaceholderText(const FString& NewText);
 
