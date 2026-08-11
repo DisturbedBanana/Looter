@@ -1,0 +1,43 @@
+name: Build Windows Binaries
+
+on:
+  push:
+    tags:
+      - 'build-*' # Triggers when you push a tag like: git tag build-1.0 && git push origin build-1.0
+
+jobs:
+  build-windows:
+    # This targets your self-hosted Windows PC
+    runs-on: [self-hosted, windows]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # Fetch depth 0 is sometimes required if you want to push back to the repo
+          fetch-depth: 0 
+
+      - name: Build Unreal Project (Windows Editor)
+        # Note: You MUST change "YourProject" and the Unreal Engine installation path below
+        run: |
+          $UE_PATH = "C:\Program Files\Epic Games\UE_5.8"
+          $PROJECT_FILE = "$env:GITHUB_WORKSPACE\Destiny3.uproject"
+          
+          # Run the Unreal Build Tool
+          & "$UE_PATH\Engine\Build\BatchFiles\Build.bat" Destiny3Editor Win64 Development -Project="$PROJECT_FILE" -WaitMutex
+
+      - name: Commit and Push Binaries
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Force add the Windows binaries (in case gitignore acts up, though our gitignore handles it)
+          git add Binaries/Win64/ -f
+          
+          # Only commit if there are changes
+          if (git diff --staged --quiet) {
+            Write-Host "No changes to commit."
+          } else {
+            git commit -m "Automated Windows build [skip ci]"
+            git push origin HEAD:main # UPDATE "main" IF YOUR DEFAULT BRANCH IS DIFFERENT
+          }

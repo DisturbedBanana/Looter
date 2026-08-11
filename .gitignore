@@ -1,0 +1,32 @@
+# Unreal Engine GitIgnore
+
+# Ignore all binaries by default
+Binaries/*
+*.so
+*.o
+*.obj
+
+# BUT allow Windows binaries so the designer can pull them
+!Binaries/Win64/
+!Binaries/Win64/**/*.dll
+!Binaries/Win64/**/*.pdb
+!Binaries/Win64/**/*.modules
+!Binaries/Win64/**/*.target
+
+# Standard Unreal Engine Ignores
+Intermediate/
+Saved/
+DerivedDataCache/
+Build/
+.vs/
+.vscode/
+.idea/
+*.code-workspace
+*.xcworkspace
+*.xcodeproj
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
