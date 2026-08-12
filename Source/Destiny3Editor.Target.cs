@@ -11,5 +11,6 @@ public class Destiny3EditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V7;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_8;
 		ExtraModuleNames.Add("Destiny3");
+		ExtraModuleNames.Add("Destiny3ItemEditor");
 	}
 }

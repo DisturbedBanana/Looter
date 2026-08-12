@@ -25,6 +25,7 @@ public class Destiny3 : ModuleRules
 
 		PublicIncludePaths.AddRange(new string[] {
 			"Destiny3",
+			"Destiny3/Items",
 			"Destiny3/Variant_Horror",
 			"Destiny3/Variant_Horror/UI",
 			"Destiny3/Variant_Shooter",
