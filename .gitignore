@@ -11,6 +11,7 @@ Binaries/*
 !Binaries/Win64/**/*.dll
 !Binaries/Win64/**/*.modules
 !Binaries/Win64/**/*.target
+*.pdb
 
 # Standard Unreal Engine Ignores
 Intermediate/
