@@ -9,7 +9,8 @@
 #include "InputActionValue.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Destiny3.h"
-
+#include "Engine/World.h"
+#include "TimerManager.h"
 ADestiny3Character::ADestiny3Character()
 {
 	// Set size for collision capsule
@@ -117,4 +118,51 @@ void ADestiny3Character::DoJumpEnd()
 {
 	// pass StopJumping to the character
 	StopJumping();
+}
+
+void ADestiny3Character::PickUpRelic(float TimerDuration)
+{
+	if (bIsCarryingRelic) return;
+	
+	bIsCarryingRelic = true;
+	RelicDeathTimer = TimerDuration;
+	
+	BP_OnRelicPickedUp();
+
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().SetTimer(RelicTimerHandle, this, &ADestiny3Character::RelicTimerTick, 1.0f, true);
+	}
+}
+
+void ADestiny3Character::DepositRelic()
+{
+	if (!bIsCarryingRelic) return;
+	
+	bIsCarryingRelic = false;
+	
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(RelicTimerHandle);
+	}
+
+	BP_OnRelicDeposited();
+}
+
+void ADestiny3Character::RelicTimerTick()
+{
+	if (!bIsCarryingRelic) return;
+	
+	RelicDeathTimer -= 1.0f;
+	
+	if (RelicDeathTimer <= 0.0f)
+	{
+		// Time's up, player dies
+		if (UWorld* World = GetWorld())
+		{
+			World->GetTimerManager().ClearTimer(RelicTimerHandle);
+		}
+		
+		BP_OnRelicTimerExpired();
+	}
 }

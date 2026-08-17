@@ -90,5 +90,35 @@ public:
 	/** Returns first person camera component **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	// Relic Mechanics
+public:
+	UFUNCTION(BlueprintCallable, Category = "Relic")
+	bool IsCarryingRelic() const { return bIsCarryingRelic; }
+
+	UFUNCTION(BlueprintCallable, Category = "Relic")
+	void PickUpRelic(float TimerDuration);
+
+	UFUNCTION(BlueprintCallable, Category = "Relic")
+	void DepositRelic();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Relic")
+	void BP_OnRelicTimerExpired();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Relic")
+	void BP_OnRelicPickedUp();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Relic")
+	void BP_OnRelicDeposited();
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Relic")
+	bool bIsCarryingRelic = false;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Relic")
+	float RelicDeathTimer = 0.0f;
+
+	FTimerHandle RelicTimerHandle;
+
+	void RelicTimerTick();
 };
 

@@ -23,7 +23,11 @@ public class Destiny3ItemEditor : ModuleRules
 			"AssetRegistry",
 			"Slate",
 			"SlateCore",
-			"InputCore"
+			"InputCore",
+			"ToolMenus",
+			"Blutility",
+			"UMG",
+			"UMGEditor"
 		});
 	}
 }
